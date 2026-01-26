@@ -1,9 +1,11 @@
 import React from 'react';
+import Button from '../components/common/Button';
 
 function MainPage() {
   return (
     <div>
       <h1>MainPage 입니다.</h1>
+      
     </div>
   );
 }
