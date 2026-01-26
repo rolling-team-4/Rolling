@@ -53,7 +53,7 @@
   --surface: #F6F8FF; 
 
 
-  font-family: 'Pretendard', sans-serif;
+  --font-family: 'Pretendard', sans-serif;
 }
 
 body {
