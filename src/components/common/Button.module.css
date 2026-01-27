@@ -1,0 +1,30 @@
+.primary {
+  background-color: var(--purple-600);
+  color: var(--white);
+  border: 2px solid transparent;
+  border-radius: 12px; /* Focus 시 2px만큼 커짐 방지 */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.01em;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px; /* 위에서 차지하는 border만큼 줄임 */
+  
+}
+
+.primary:hover:not(:disabled) { background-color: var(--purple-700); }
+.primary:active:not(:disabled) { background-color: var(--purple-800); }
+.primary:disabled { background-color: var(--gray-300); }
+.primary:disabled:focus { background-color: var(--gray-300); }
+.primary:focus {
+  outline: none; 
+  background-color: var(--purple-800); 
+  border: 2px solid var(--purple-900); 
+}
