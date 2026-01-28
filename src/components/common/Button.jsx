@@ -6,7 +6,7 @@ function Button({ children, disabled, onClick, ...props }) {
       className={styles.primary} 
       disabled={disabled} 
       onClick={onClick}
-      {...props} // Button 가져가서 속성(style등등) 변경할때 여기서 처리 
+      {...props}
     >
       {children}
     </button>

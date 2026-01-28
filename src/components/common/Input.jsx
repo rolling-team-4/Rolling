@@ -1,12 +1,24 @@
-import styles from './Iutton.module.css';
+import styles from './Input.module.css';
 
-function Input({ children }) {
+function Input({ id, label, value, onChange, placeholder, ...props }) {
+  
   return (
-    <input
-      
-    >
-      {children}
-    </input>
+    <div className={styles.inputContainer}>
+      {label && (
+        <label htmlFor={id} className={styles.inputLabel}>
+          {label}
+        </label>
+      )}
+      <input 
+        className={styles.inputBox}
+        id={id}
+        type='text'
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        {...props}
+      />
+    </div>
   );
 }
 

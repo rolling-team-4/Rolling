@@ -1,17 +1,39 @@
-.buttonArea {
-  display: flex;
-  gap: 8px;
+.container {
+  max-width: 720px;
+  margin: 0 auto;
 }
 
-.active {
-  background-color: #007bff !important;
-  color: white;
+.textBox {
+  margin-top: 50px;
+}
+
+.textBox .titleText {
+  margin: 0;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+  letter-spacing: -0.01em;
+}
+
+.textBox .subText {
+  margin: 4px 0 0 0;
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: -0.01em;
+}
+
+.buttonBox {
+  margin: 24px 0 45px 0;
+  display: flex;
 }
 
 .list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 16px;
   list-style: none;
   padding: 0;
   margin-top: 20px;
@@ -19,13 +41,13 @@
 
 .colorBox {
   width: 100%;
-  height: 100px;
-  border-radius: 8px;
+  height: 168px;
+  border-radius: 16px;
 }
 
 .imageItem img {
   width: 100%;
-  height: 100px;
+  height: 168px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 16px;
 }
