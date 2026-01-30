@@ -21,21 +21,10 @@
 
 .primary:hover:not(:disabled) { background-color: var(--purple-700); }
 .primary:active:not(:disabled) { background-color: var(--purple-800); }
-.primary:disabled { background-color: var(--gray-300); }
+.primary:disabled { background-color: var(--gray-300); cursor: not-allowed; }
 .primary:disabled:focus { background-color: var(--gray-300); }
 .primary:focus {
   outline: none; 
   background-color: var(--purple-800); 
   border: 2px solid var(--purple-900); 
-}
-
-.selected {
-  background-color: #fff !important;
-  border: 2px solid #9935FF !important;
-  color: #9935FF;
-}
-
-.unselected {
-  background-color: #ccc !important;
-  border: 2px solid transparent !important;
 }

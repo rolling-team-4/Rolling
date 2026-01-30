@@ -2,25 +2,75 @@ import { useState } from 'react';
 import Button from '../components/common/Button';
 import styles from "./PostCreatePage.module.css";
 import Input from '../components/common/Input';
+import img1 from '../assets/image1.svg';
+import img2 from '../assets/image2.svg';
+import img3 from '../assets/image3.svg';
+import img4 from '../assets/image4.svg';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function PostCreatePage() {
+  const navigate = useNavigate(); 
+  const colors = ["#FFE2AD", "#ECD9FF", "#B1E4FF", "#D0F5C3"];
+  const images = [img1, img2, img3, img4];
+  const colorMap = {
+  "#FFE2AD": "beige",
+  "#ECD9FF": "purple",
+  "#B1E4FF": "blue",
+  "#D0F5C3": "green"
+};
+
   const [title, setTitle] = useState('');
+  const [isTouched, setIsTouched] = useState(false);
   const [selectedButton, setSelectedButton] = useState('color');
+  const [selectedItem, setSelectedItem] = useState(colors[0]);
 
-  const colors = ["orange", "purple", "blue", "green"];
-  const images = [
-    "",
-    "",
-    "",
-    "",
-  ];
+  const isButtonDisabled = title.trim() === '';
+  const isTitleError = isTouched && title.trim() === '';
 
-  const getButtonStyle = (isSelected) => ({
-    backgroundColor: isSelected ? '#fff' : '#ccc',
-    border: isSelected ? '2px solid #9935FF' : '2px solid transparent',
-    color: isSelected ? '#9935FF' : '#666',
-    cursor: 'pointer'
-  });
+  const handleSubmit = async () => {
+    const postData = {
+      name: title,
+      backgroundColor: selectedButton === 'color' ? colorMap[selectedItem] : 'beige',
+      backgroundImageURL: selectedButton === 'image' ? colorMap[selectedItem] : null,
+    };
+
+    try {
+      const response = await axios.post(
+        'https://rolling-api.vercel.app/22-4/recipients/', 
+        postData
+      );
+      
+      const { id } = response.data;
+      navigate(`/post/${id}`);
+      
+    } catch (error) {
+      console.error("생성 중 에러 발생:", error);
+      alert("롤링페이퍼 생성에 실패했습니다. 다시 시도해 주세요.");
+    }
+  };
+
+  const getItemClassName = (type, value) => {
+    const baseClass = type === 'color' ? styles.colorItem : styles.imageItem;
+    if (selectedItem === value) {
+      return baseClass + " " + styles.activeItem;
+    }
+    return baseClass;
+  };
+
+  const handleTabChange = (tab) => {
+    setSelectedButton(tab);
+    
+    if (tab === "color") {
+      setSelectedItem(colors[0]);
+    } else if (tab === "image") {
+      setSelectedItem(images[0]);
+    }
+  };
+
+  const getButtonClass = (id) => {
+    return `${styles.baseButton} ${selectedButton === id ? styles.selected : styles.unselected}`;
+  };
 
   const handleChange = (e) => {
     setTitle(e.target.value);
@@ -36,6 +86,8 @@ function PostCreatePage() {
           placeholder='받는 사람 이름을 입력해 주세요'
           value={title}
           onChange={handleChange}
+          onBlur={() => setIsTouched(true)} 
+          isError={isTitleError}
         />
       </div>
       <div className={styles.textBox}>
@@ -44,14 +96,14 @@ function PostCreatePage() {
       </div>
       <div className={styles.buttonBox}>
         <Button
-          style={getButtonStyle(selectedButton === 'color')}
-          onClick={() => setSelectedButton("color")}
+          className={getButtonClass("color")}
+          onClick={() => handleTabChange("color")}
         >
           컬러
         </Button>
         <Button
-          style={getButtonStyle(selectedButton === 'image')}
-          onClick={() => setSelectedButton("image")}
+          className={getButtonClass("image")}
+          onClick={() => handleTabChange("image")}
         >
           이미지
         </Button>
@@ -60,10 +112,14 @@ function PostCreatePage() {
       <ul className={styles.list}>
         {selectedButton === "color" &&
           colors.map((color) => (
-            <li key={color} className={styles.colorItem}>
+            <li 
+              key={color} 
+              className={getItemClassName("color", color)}
+              onClick={() => setSelectedItem(color)}
+            >
               <div
                 className={styles.colorBox}
-                style={{ backgroundColor: color }}
+                style={{ backgroundColor: color}}
               />
             </li>
           ))
@@ -71,14 +127,23 @@ function PostCreatePage() {
 
         {selectedButton === "image" &&
           images.map((src, idx) => (
-            <li key={idx} className={styles.imageItem}>
-              <img src={src} alt="" />
+            <li 
+              key={idx} 
+              className={getItemClassName("image", src)}
+              onClick={() => setSelectedItem(src)}
+            >
+              <img src={src} alt={`이미지 ${idx + 1}`} />
             </li>
           ))
         }
       </ul>
-      <div>
-        <Button>생성하기</Button>
+      <div className={styles.createButton}>
+        <Button 
+          disabled={isButtonDisabled}
+          onClick={handleSubmit}
+        >
+          생성하기
+        </Button>
       </div>
     </div>
   );

@@ -1,6 +1,12 @@
 import styles from './Input.module.css';
 
-function Input({ id, label, value, onChange, placeholder, ...props }) {
+function Input({ id, label, value, isError, onChange, placeholder, ...props }) {
+
+  let inputClassName = styles.inputBox;
+
+  if (isError) {
+    inputClassName += ` ${styles.error}`;
+  }
   
   return (
     <div className={styles.inputContainer}>
@@ -10,7 +16,7 @@ function Input({ id, label, value, onChange, placeholder, ...props }) {
         </label>
       )}
       <input 
-        className={styles.inputBox}
+        className={inputClassName}
         id={id}
         type='text'
         placeholder={placeholder}
@@ -18,6 +24,7 @@ function Input({ id, label, value, onChange, placeholder, ...props }) {
         onChange={onChange}
         {...props}
       />
+      {isError && <p className={styles.errorMessage}>값을 입력해 주세요.</p>}
     </div>
   );
 }
