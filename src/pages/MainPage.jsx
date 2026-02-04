@@ -4,11 +4,14 @@ import Button from '../components/common/Button';
 import mainImg01 from '../assets/main_01.svg';
 import mainImg02 from '../assets/main_02.png';
 import mainImg01_m from '../assets/main_01_mobile.svg';
+import ShareButton from '../components/Post/ShareButton.jsx';
 
 function MainPage() {
   return (
+    
     <main className={styles.mainContainer}>
       <section className={styles.section}>
+        <ShareButton />
         <div className={styles.textGroup}>
           <span className={styles.pointBadge}>Point. 01</span>
           <h2 className={styles.title}>
