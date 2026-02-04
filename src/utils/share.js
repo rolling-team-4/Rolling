@@ -1,4 +1,4 @@
-const KAKAO_KEY = "fae0dd0ae010987936493b44d231eb3a";
+const KAKAO_KEY = import.meta.env.VITE_KAKAO_KEY;
 
 export const shareKakao = (realUrl) => {
   if (!window.Kakao) {
