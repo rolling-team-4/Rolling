@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../api/axios';
+import PostModal from './PostModal';
 import styles from './MessageGrid.module.css';
 
 function MessageGrid() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // 서버에서 받아온 메시지들을 담을 상태
+  // 상태 관리
+  // 서버에서 받아온 메시지 객체들을 모아두는 배열
   const [messages, setMessages] = useState([]);
-  const [background, setBackground] = useState({ color: '', image: '' }); // 배경 상태 추가
+  // 현재 상세 페이지의 배경 설정 값 (배경색이나 이미지 주소)
+  const [background, setBackground] = useState({ color: '', image: '' });
+  // 현재 클릭해서 모달로 보여주고 있는 메시지 데이터
+  const [selectedMessage, setSelectedMessage] = useState(null);
 
   // 데이터 불러오기 함수
   const fetchMessages = async () => {
@@ -62,45 +67,59 @@ function MessageGrid() {
     : { backgroundColor: bgColors[background.color] || 'var(--surface)' };
 
   return (
-    <div className={styles.container} style={containerStyle}>
-      <div className={styles.cardList}>
-        {/* 추가 버튼 카드 */}
-        <div className={styles.addButtonCard}>
-          <div 
-            className={styles.addButton} 
-            onClick={() => navigate(`/post/${id}/message`)}
-          ></div>
-        </div>
-        {/* 메시지 카드 리스트 */}
-        {messages.map((message) => (
-          <div key={message.id} className={styles.messageCard}>
-            <div className={styles.profileSection}>
-              {/* 프로필 이미지가 있을 때만 렌더링, 없으면 플레이스홀더 */}
-              {message.profileImageURL ? (
-                <img src={message.profileImageURL} className={styles.profileImage} alt="프로필" />
-              ) : (
-                <div className={styles.profileImagePlaceholder} />
-              )}
-              <div className={styles.senderInfo}>
-                <div className={styles.nameBox}>
-                  <span>From.</span>
-                  <span className={styles.name}>{message.sender}</span>
-                </div>
-                <span className={`${styles.relationshipBadge} ${relationshipClassMap[message.relationship]}`}>
-                  {message.relationship}
-                </span>
-              </div>
-            </div>
-            <p className={styles.content} style={{ fontFamily: message.font }}>
-              {message.content}
-            </p>
-            <span className={styles.date}>
-              {new Date(message.createdAt).toLocaleDateString()}
-            </span>
+    <>
+      {/* PostHeader 부분 */}
+      <div className={styles.container} style={containerStyle}>
+        <div className={styles.cardList}>
+          {/* 추가 버튼 카드 */}
+          <div className={styles.addButtonCard}>
+            <div 
+              className={styles.addButton} 
+              onClick={() => navigate(`/post/${id}/message`)}
+            ></div>
           </div>
-        ))}
+          {/* 메시지 카드 리스트 */}
+          {messages.map((message) => (
+            <div 
+              key={message.id} 
+              className={styles.messageCard} 
+              onClick={() => setSelectedMessage(message)}
+            >
+              <div className={styles.profileSection}>
+                {/* 프로필 이미지가 있을 때만 렌더링, 없으면 플레이스홀더 */}
+                {message.profileImageURL ? (
+                  <img src={message.profileImageURL} className={styles.profileImage} alt="프로필" />
+                ) : (
+                  <div className={styles.profileImagePlaceholder} />
+                )}
+                <div className={styles.senderInfo}>
+                  <div className={styles.nameBox}>
+                    <span>From.</span>
+                    <span className={styles.name}>{message.sender}</span>
+                  </div>
+                  <span className={`${styles.relationshipBadge} ${relationshipClassMap[message.relationship]}`}>
+                    {message.relationship}
+                  </span>
+                </div>
+              </div>
+              <p className={styles.content} style={{ fontFamily: message.font }}>
+                {message.content}
+              </p>
+              <span className={styles.date}>
+                {new Date(message.createdAt).toLocaleDateString()}
+              </span>
+            </div>
+          ))}
+        </div>
+        {/* 모달 렌더링 (selectedMessage가 있을 때만 띄움) */}
+        {selectedMessage && (
+          <PostModal
+            message={selectedMessage}
+            onClose={() => setSelectedMessage(null)}
+          />
+        )}
       </div>
-    </div>
+    </>
   );
 }
 
