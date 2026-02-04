@@ -8,7 +8,6 @@ import mainImg01_m from '../assets/main_01_mobile.svg';
 function MainPage() {
   return (
     <main className={styles.mainContainer}>
-    
       <section className={styles.section}>
         <div className={styles.textGroup}>
           <span className={styles.pointBadge}>Point. 01</span>
