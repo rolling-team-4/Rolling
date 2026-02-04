@@ -2,17 +2,18 @@ import { useState } from 'react';
 import Button from '../components/common/Button';
 import styles from "./PostCreatePage.module.css";
 import Input from '../components/common/Input';
-import img1 from '../assets/image1.svg';
-import img2 from '../assets/image2.svg';
-import img3 from '../assets/image3.svg';
-import img4 from '../assets/image4.svg';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function PostCreatePage() {
   const navigate = useNavigate(); 
   const colors = ["#FFE2AD", "#ECD9FF", "#B1E4FF", "#D0F5C3"];
-  const images = [img1, img2, img3, img4];
+  const images = [
+    "https://picsum.photos/id/100/3840/2160",
+    "https://picsum.photos/id/24/3840/2160",
+    "https://picsum.photos/id/153/3840/2160",
+    "https://picsum.photos/id/1051/3840/2160"
+  ];
   const colorMap = {
   "#FFE2AD": "beige",
   "#ECD9FF": "purple",
@@ -29,10 +30,12 @@ function PostCreatePage() {
   const isTitleError = isTouched && title.trim() === '';
 
   const handleSubmit = async () => {
+    console.log("선택된 아이템:", selectedItem);
+    console.log("보낼 이미지 URL:", images[selectedItem]);
     const postData = {
       name: title,
       backgroundColor: selectedButton === 'color' ? colorMap[selectedItem] : 'beige',
-      backgroundImageURL: selectedButton === 'image' ? colorMap[selectedItem] : null,
+      backgroundImageURL: selectedButton === 'image' ? selectedItem : null,
     };
 
     try {
@@ -68,8 +71,8 @@ function PostCreatePage() {
     }
   };
 
-  const getButtonClass = (id) => {
-    return `${styles.baseButton} ${selectedButton === id ? styles.selected : styles.unselected}`;
+  const getButtonClass = (prop) => {
+    return `${styles.baseButton} ${selectedButton === prop ? styles.selected : styles.unselected}`;
   };
 
   const handleChange = (e) => {
