@@ -12,6 +12,7 @@ function MessageGrid({ isEditMode }) {
   const { id } = useParams();
 
   // 상태 관리
+  const [recipientData, setRecipientData] = useState(null);
   const [messages, setMessages] = useState([]);
   const [background, setBackground] = useState({ color: '', image: '' });
   const [selectedMessage, setSelectedMessage] = useState(null);
@@ -19,7 +20,7 @@ function MessageGrid({ isEditMode }) {
   // 데이터 불러오기 함수
   const fetchMessages = async () => {
     try {
-      const response = await api.get(`recipients/${id}/messages/`);
+      const response = await api.get(`recipients/${id}/messages/?limit=100`);
       setMessages(response.data.results);
     } catch (error) {
       console.error("데이터를 가져오는데 실패했습니다.", error);
@@ -27,17 +28,15 @@ function MessageGrid({ isEditMode }) {
   };
 
   // 대상 정보(배경) 가져오기
-  const fetchBackground = async () => {
+  const fetchRecipient = async () => {
     try {
       const response = await api.get(`recipients/${id}/`);
-      setBackground({
-        color: response.data.backgroundColor,
-        image: response.data.backgroundImageURL,
-      });
+     setRecipientData(response.data);
     } catch (error) {
-      console.error("배경 데이터를 가져오는데 실패했습니다.", error);
+      console.error("대상 정보를 가져오는데 실패했습니다.", error);
     }
   };
+
 
   // 롤링페이퍼 전체 삭제 함수
   const handleDeleteRecipient = async () => {
@@ -67,9 +66,12 @@ function MessageGrid({ isEditMode }) {
   };
 
   useEffect(() => {
-    fetchBackground();
+    fetchRecipient();
     fetchMessages();
   }, [id]);
+
+  // 데이터가 아직 안 왔으면 로딩 중 처리 (에러 방지)
+  if (!recipientData) return <div>로딩 중...</div>;
 
   // 배경 스타일 설정
   const bgColors = {
@@ -78,14 +80,19 @@ function MessageGrid({ isEditMode }) {
     blue: 'var(--blue-200)',
     green: 'var(--green-200)',
   };
+  const { backgroundColor, backgroundImageURL } = recipientData;
 
-  const containerStyle = background.image
-    ? { backgroundImage: `url(${background.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-    : { backgroundColor: bgColors[background.color] || 'var(--surface)' };
+  const containerStyle = backgroundImageURL
+    ? { backgroundImage: `url(${backgroundImageURL})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+    : { backgroundColor: bgColors[backgroundColor] || 'var(--surface)' };
 
   return (
     <>
-      <PostHeader />
+      <PostHeader 
+        recipientName={recipientData.name} 
+        messageCount={recipientData.messageCount}
+        recentMessages={recipientData.recentMessages} // writerInfo
+      />
 
       <div className={styles.container} style={containerStyle}>
         <div className={styles.deleteBtnWrapper}>
