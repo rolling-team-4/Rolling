@@ -44,3 +44,19 @@
   font-size: 12px;
   margin-top: 4px;
 }
+
+@media (max-width: 767px) {
+  .inputContainer {
+    margin-top: 50px;
+    box-sizing: border-box;
+  }
+
+  .inputLabel {
+    line-height: 36px;
+  }
+
+  .inputBox {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
