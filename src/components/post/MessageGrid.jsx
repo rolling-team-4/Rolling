@@ -4,8 +4,9 @@ import api from '../../api/axios';
 import MessageCard from './MessageCard';
 import PostModal from './PostModal';
 import styles from './MessageGrid.module.css';
+import Button from '../common/Button';
 
-function MessageGrid() {
+function MessageGrid({ isEditMode }) {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -40,6 +41,33 @@ function MessageGrid() {
     }
   };
 
+  // 롤링페이퍼 전체 삭제 함수
+  const handleDeleteRecipient = async () => {
+    if (!window.confirm("이 롤링페이퍼를 삭제하시겠습니까?")) {
+      return;
+    }
+    try {
+      await api.delete(`recipients/${id}/`);
+      navigate('/list');
+    } catch (error) {
+      console.error("전체 삭제 실패", error);
+    }
+  }
+
+  // 메시지 삭제 함수
+  const handleDeleteMessage = async (messageId) => {
+    if (!window.confirm("이 메시지를 삭제하시겠습니까?")) {
+      return;
+    }
+    try {
+      await api.delete(`messages/${messageId}/`);
+      setMessages((prev) => prev.filter((msg) => msg.id !== messageId));
+      navigate(`/post/${id}`);
+    } catch (error) {
+      console.error("메시지 삭제 실패", error);
+    }
+  }
+
   // 컴포넌트가 마운트될 때 실행
   useEffect(() => {
     fetchBackground();
@@ -60,35 +88,43 @@ function MessageGrid() {
     : { backgroundColor: bgColors[background.color] || 'var(--surface)' };
 
   return (
-    <>
-      {/* PostHeader 부분 */}
-      <div className={styles.container} style={containerStyle}>
-        <div className={styles.cardList}>
-          {/* 추가 버튼 카드 */}
+    <div className={styles.container} style={containerStyle}>
+      <div className={styles.deleteBtnWrapper}>
+        <Button 
+          onClick={isEditMode ? handleDeleteRecipient : () => navigate(`/post/${id}/edit`)}
+        >
+          {isEditMode ? "롤링페이퍼 삭제" : "삭제하기"}
+        </Button>
+      </div>
+      <div className={styles.cardList}>
+        {/* 일반 모드일 때만 추가 버튼 노출 */}
+        {!isEditMode && (
           <div className={styles.addButtonCard}>
             <div 
               className={styles.addButton} 
               onClick={() => navigate(`/post/${id}/message`)}
             ></div>
           </div>
-          {/* 메시지 카드 리스트 */}
-          {messages.map((message) => (
-            <MessageCard 
-              key={message.id} 
-              message={message} 
-              onClick={() => setSelectedMessage(message)} 
-            />
-          ))}
-        </div>
-        {/* 모달 렌더링 (selectedMessage가 있을 때만 띄움) */}
-        {selectedMessage && (
-          <PostModal
-            message={selectedMessage}
-            onClose={() => setSelectedMessage(null)}
-          />
         )}
+        {/* 메시지 카드 리스트 */}
+        {messages.map((message) => (
+          <MessageCard 
+            key={message.id} 
+            message={message}
+            isEditMode={isEditMode}
+            onDelete={handleDeleteMessage}
+            onClick={() => setSelectedMessage(message)} 
+          />
+        ))}
       </div>
-    </>
+      {/* 모달 렌더링 (selectedMessage가 있을 때만 띄움) */}
+      {selectedMessage && (
+        <PostModal
+          message={selectedMessage}
+          onClose={() => setSelectedMessage(null)}
+        />
+      )}
+    </div>
   );
 }
 
