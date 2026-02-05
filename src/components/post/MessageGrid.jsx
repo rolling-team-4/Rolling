@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../api/axios';
+import MessageCard from './MessageCard';
 import PostModal from './PostModal';
 import styles from './MessageGrid.module.css';
 
@@ -45,14 +46,6 @@ function MessageGrid() {
     fetchMessages();
   }, [id]);
 
-  // 관계 문자열을 CSS 클래스명으로 바꿔주는 매핑 객체
-  const relationshipClassMap = {
-    '친구': styles.friend,
-    '동료': styles.colleague,
-    '가족': styles.family,
-    '지인': styles.acquaintance,
-  };
-
   // 배경 스타일 설정
   const bgColors = {
     beige: 'var(--orange-200)',
@@ -80,35 +73,11 @@ function MessageGrid() {
           </div>
           {/* 메시지 카드 리스트 */}
           {messages.map((message) => (
-            <div 
+            <MessageCard 
               key={message.id} 
-              className={styles.messageCard} 
-              onClick={() => setSelectedMessage(message)}
-            >
-              <div className={styles.profileSection}>
-                {/* 프로필 이미지가 있을 때만 렌더링, 없으면 플레이스홀더 */}
-                {message.profileImageURL ? (
-                  <img src={message.profileImageURL} className={styles.profileImage} alt="프로필" />
-                ) : (
-                  <div className={styles.profileImagePlaceholder} />
-                )}
-                <div className={styles.senderInfo}>
-                  <div className={styles.nameBox}>
-                    <span>From.</span>
-                    <span className={styles.name}>{message.sender}</span>
-                  </div>
-                  <span className={`${styles.relationshipBadge} ${relationshipClassMap[message.relationship]}`}>
-                    {message.relationship}
-                  </span>
-                </div>
-              </div>
-              <p className={styles.content} style={{ fontFamily: message.font }}>
-                {message.content}
-              </p>
-              <span className={styles.date}>
-                {new Date(message.createdAt).toLocaleDateString()}
-              </span>
-            </div>
+              message={message} 
+              onClick={() => setSelectedMessage(message)} 
+            />
           ))}
         </div>
         {/* 모달 렌더링 (selectedMessage가 있을 때만 띄움) */}
