@@ -173,3 +173,41 @@
 .createButton button {
   width: 100%; 
 }
+
+@media (max-width: 767px) {
+  .container {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0;
+  }
+
+  .imageList {
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .item {
+    width: 40px;
+    height: 40px;
+  }
+
+  .editor {
+    overflow: visible !important;
+  }
+
+  .createButton {
+    margin: 206px 0 24px 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .relationship,
+  .fontSelect {
+    width: 100%;
+  }
+
+  .relationshipButton,
+  .fontSelectButton {
+    width: 100%;
+  }
+}
