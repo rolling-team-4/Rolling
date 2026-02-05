@@ -1,0 +1,268 @@
+.cardListWrapper {
+    width: 100%;
+    position: relative;
+    margin-bottom: 50px;
+    width: 100%;
+    max-width: 1160px; 
+    margin: 0 auto; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.cardListWrapper .sldBtn { 
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    border: 1px solid #DADCDF;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px 0px #00000014;
+    backdrop-filter: blur(4px)
+}
+
+.cardListWrapper .sldBtn:disabled {
+    pointer-events: none;
+    display: none;
+}
+
+.cardListWrapper .sldBtn.prev { 
+    left: 0;
+    transform: translate(-50%,-50%);
+    background: rgba(255, 255, 255, .9) url('../../assets/arrow_left.svg') no-repeat center /auto;
+}
+.cardListWrapper .sldBtn.next { 
+    right: 0;
+    transform: translate(50%,-50%) scaleX(-1);
+    background: rgba(255, 255, 255, .9) url('../../assets/arrow_left.svg') no-repeat center /auto;
+    
+}
+
+.cardListCont {
+    overflow-x: auto;
+    /* padding-bottom: 20px; */
+    gap: 2rem;
+    scroll-behavior: smooth;
+}
+
+.cardListCont::-webkit-scrollbar {
+    display: none;
+}
+
+.cardList {
+    font-family: 'Pretendard';
+    width: 100%;
+    display: flex;
+    gap: 20px;
+    white-space: nowrap;  
+    transition: transform 0.4s ease;
+    z-index: 1;
+}
+
+.cardLink {
+    border-radius: 16px;
+    box-shadow: 0px 2px 12px 0px #00000014;
+    position: relative;
+    width: 275px;
+    height: 260px;
+    flex-shrink: 0;
+    padding: 30px 24px 20px;
+    border: 1px solid rgba(0,0,0,.1);
+    background-color: #ECD9FF;
+    border-radius: 16px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.cardLink:before { 
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 118px;
+    border-radius: 0 0 16px 0;
+    width: 142px;
+    height: 142px;
+}
+
+.cardLink.beige:before { 
+    background: url('../../assets/pattern_beige.svg') no-repeat right bottom/100% 100%;
+}
+.cardLink.green:before { 
+    background: url('../../assets/pattern_green.svg') no-repeat right bottom/100% 100%;
+}
+.cardLink.purple:before { 
+    background: url('../../assets/pattern_purple.svg') no-repeat right bottom/100% 100%;
+}
+.cardLink.blue:before { 
+    background: url('../../assets/pattern_blue.svg') no-repeat right bottom/100% 100%;
+}
+.cardLink.hasImage:before { 
+    display: none;
+}
+
+.cardLink.beige  {
+    background-color: #FFE2AD;
+}
+.cardLink.blue  {
+    background-color: #B1E4FF;
+}
+.cardLink.purple  {
+    background-color: #ECD9FF;
+}
+.cardLink.green  {
+    background-color: #D0F5C3;
+}
+
+.cardList .card .cardTo {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    margin-bottom: 7px;
+}
+
+.imgContainer {
+    width: 100%;
+    height: 28px;
+    margin-bottom: 12px;
+}
+
+.imgContainer > div {
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    border: 1.5px solid #fff;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -12px;
+}
+
+.imgContainer > div:first-child {
+    margin-left: 0;
+}
+
+.imgContainer .imgBox {
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.imgContainer .imgBox img {
+    width: 100%;
+    height: 100%;
+}
+
+.imgContainer .extra {
+    border-radius: 30px;
+    background: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #555;
+    padding: 0 6px 0 5px;
+    letter-spacing: -0.06em;
+    white-space: nowrap;
+}
+.imgContainer .extra >span {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.imgContainer .extra >span:first-child {
+    margin-top: -1px;
+}
+
+
+.totaltxt {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    margin-bottom: 43px;
+}
+.totaltxt span {
+    font-weight: 700;
+}
+
+.reactions {
+    border-top: 1px solid rgba(0,0,0,.12);
+    padding-top: 16px;
+    position: relative;
+}
+
+.reactions .reactionBox {
+    padding: 0 12px;
+    border-radius: 32px;
+    background-color: rgba(0, 0, 0, .54);
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+    line-height: 36px;
+    text-align: center;
+}
+.reactions .reactionBox ~ .reactionBox {
+    margin-left: 8px;
+    
+}
+.reactions .reactionBox span {
+    margin-right: 2px;
+}
+
+
+
+
+
+@media (max-width: 1024px) {
+    .sldBtn {
+        display: none;
+    }
+
+    .cardListCont {
+        max-width: 100%;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+
+    .cardLink { 
+        width: 208px;
+        height:232px;
+        padding: 30px 24px;
+
+    }
+
+    .cardLink:before { 
+        width: 108px;
+        height: 142px;
+    }
+
+    .cardList .card .cardTo {
+        font-size: 18px;
+        line-height: 28px;
+        margin-bottom: 12px;
+    }
+
+    .totaltxt {
+        font-size: 14px;
+        line-height: 20px;
+        margin-bottom: 33px;
+    }
+
+    .reactions .reactionBox {
+        font-size: 14px;
+        padding: 0 8px;
+        font-size: 14px;
+        line-height: 32px;
+    }
+
+
+
+}
+
