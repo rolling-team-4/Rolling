@@ -21,7 +21,7 @@
 
 .primary:hover:not(:disabled) { background-color: var(--purple-700); }
 .primary:active:not(:disabled) { background-color: var(--purple-800); }
-.primary:disabled { background-color: var(--gray-300); }
+.primary:disabled { background-color: var(--gray-300); cursor: not-allowed; }
 .primary:disabled:focus { background-color: var(--gray-300); }
 .primary:focus {
   outline: none; 

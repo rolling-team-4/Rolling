@@ -1,0 +1,194 @@
+/* 전체 컨테이너 */
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 1200px;
+  margin: 113px auto;
+}
+
+/* 화면 너비가 1248px보다 줄어들 때 */
+@media (max-width: 1248px) {
+  .cardList {
+    /* 좌우 여백을 24px로 고정하기 위해 전체 너비에서 48px을 제외 */
+    width: calc(100% - 48px);
+    /* 여백 고정 */
+    margin: 0 24px;
+    /* 1fr 설정에 의해 부모 너비가 줄어들면 카드들의 너비도 자동으로 함께 줄어듦. */
+  }
+}
+
+/* 추가 버튼 카드 */
+.addButtonCard {
+  background-color: var(--white);
+  border-radius: 16px;
+  aspect-ratio: 1 / 0.8; /* 가로 1, 세로 0.8 비율 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* 플러스 아이콘 */
+.addButton {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  background-color: var(--gray-500);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* 마우스 올렸을 때 */
+.addButton:hover {
+  background-color: var(--gray-600); 
+}
+
+/* 클릭했을 때 */
+.addButton:active {
+  background-color: var(--gray-700);
+}
+
+/* 포커스 되었을 때
+.addButton:focus {
+  background-color: var(--gray-700);
+  box-shadow: 0 0 0 4px rgba(153, 74, 255, 0.4); 보라색 테두리 효과 
+} */
+
+/* 가상 요소로 플러스 버튼 만들기 */
+.addButton::before,
+.addButton::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background-color: var(--white);
+  transform: translate(-50%, -50%);
+}
+
+/* 가로선 */
+.addButton::before {
+  width: 24px;
+  height: 3px;
+  border-radius: 10px;
+}
+
+/* 세로선 */
+.addButton::after {
+  width: 3px;
+  height: 24px;
+  border-radius: 10px;
+}
+
+/* 메시지 카드 */
+.messageCard {
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 28px 24px;
+  aspect-ratio: 1 / 0.8;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+/* 프로필 이미지 */
+.profileImage {
+  width: 56px;
+  height: 56px;
+  border-radius: 100px;
+  object-fit: cover;
+}
+
+/* 프로필 영역 */
+.profileSection {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid var(--gray-200);
+  padding-bottom: 16px;
+  margin-bottom: 15px;
+}
+
+.profileImagePlaceholder {
+  width: 56px;
+  height: 56px;
+  border-radius: 100px;
+  background-color: var(--gray-200);
+}
+
+.senderInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; 
+}
+
+.nameBox {
+  font-size: 20px;
+  display: flex;
+  gap: 6px;
+}
+
+.name {
+  font-weight: 700;
+  color: var(--black);
+}
+
+/* 관계 배지 */
+.relationshipBadge {
+  font-size: 14px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+/* 관계별 색상 클래스 */
+/* 친구 */
+.friend { 
+  background-color: var(--blue-100);
+  color: var(--blue-500);
+}
+/* 동료 */
+.colleague {
+  background-color: var(--purple-100);
+  color: var(--purple-600);
+}
+
+/* 가족 */
+.family {
+  background-color: var(--green-100);
+  color: var(--green-500);
+}
+
+/* 지인 */
+.acquaintance {
+  background-color: var(--orange-100);
+  color: var(--orange-500);
+}
+
+.content {
+  font-size: 16px;
+  color: var(--gray-600);
+  line-height: 1.6;
+  /* 4줄 말줄임 처리 */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* 구형 브라우저용 */
+  line-clamp: 4; /* 최신 표준 속성 */
+}
+
+.date {
+  font-weight: 400;
+  margin-top: auto;
+  font-size: 12px;
+  color: var(--gray-400);
+}
