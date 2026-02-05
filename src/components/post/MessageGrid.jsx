@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../api/axios';
 import PostModal from './PostModal';
 import styles from './MessageGrid.module.css';
+import PostHeader from './PostHeader.jsx';
 
 function MessageGrid() {
   const navigate = useNavigate();
@@ -68,7 +69,7 @@ function MessageGrid() {
 
   return (
     <>
-      {/* PostHeader 부분 */}
+      <PostHeader />
       <div className={styles.container} style={containerStyle}>
         <div className={styles.cardList}>
           {/* 추가 버튼 카드 */}
