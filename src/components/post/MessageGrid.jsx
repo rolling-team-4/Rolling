@@ -1,26 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../../api/axios';
+import MessageCard from './MessageCard'; 
 import PostModal from './PostModal';
 import styles from './MessageGrid.module.css';
-import PostHeader from './PostHeader.jsx';
+import PostHeader from './PostHeader.jsx'; 
+import Button from '../common/Button'; 
 
-function MessageGrid() {
+function MessageGrid({ isEditMode }) { 
   const navigate = useNavigate();
   const { id } = useParams();
 
   // 상태 관리
-  // 서버에서 받아온 메시지 객체들을 모아두는 배열
   const [messages, setMessages] = useState([]);
-  // 현재 상세 페이지의 배경 설정 값 (배경색이나 이미지 주소)
   const [background, setBackground] = useState({ color: '', image: '' });
-  // 현재 클릭해서 모달로 보여주고 있는 메시지 데이터
   const [selectedMessage, setSelectedMessage] = useState(null);
 
   // 데이터 불러오기 함수
   const fetchMessages = async () => {
     try {
-      const response = await api.get(`recipients/${id}/messages/`); // baseURL 뒤에 붙을 세부 주소
+      const response = await api.get(`recipients/${id}/messages/`);
       setMessages(response.data.results);
     } catch (error) {
       console.error("데이터를 가져오는데 실패했습니다.", error);
@@ -40,19 +39,37 @@ function MessageGrid() {
     }
   };
 
-  // 컴포넌트가 마운트될 때 실행
+  // 롤링페이퍼 전체 삭제 함수
+  const handleDeleteRecipient = async () => {
+    if (!window.confirm("이 롤링페이퍼를 삭제하시겠습니까?")) {
+      return;
+    }
+    try {
+      await api.delete(`recipients/${id}/`);
+      navigate('/list');
+    } catch (error) {
+      console.error("전체 삭제 실패", error);
+    }
+  };
+
+  // 메시지 삭제 함수
+  const handleDeleteMessage = async (messageId) => {
+    if (!window.confirm("이 메시지를 삭제하시겠습니까?")) {
+      return;
+    }
+    try {
+      await api.delete(`messages/${messageId}/`);
+      setMessages((prev) => prev.filter((msg) => msg.id !== messageId));
+      navigate(`/post/${id}`);
+    } catch (error) {
+      console.error("메시지 삭제 실패", error);
+    }
+  };
+
   useEffect(() => {
     fetchBackground();
     fetchMessages();
   }, [id]);
-
-  // 관계 문자열을 CSS 클래스명으로 바꿔주는 매핑 객체
-  const relationshipClassMap = {
-    '친구': styles.friend,
-    '동료': styles.colleague,
-    '가족': styles.family,
-    '지인': styles.acquaintance,
-  };
 
   // 배경 스타일 설정
   const bgColors = {
@@ -62,7 +79,6 @@ function MessageGrid() {
     green: 'var(--green-200)',
   };
 
-  // 이미지가 있다면 backgroundImage, 없다면 backgroundColor 스타일 적용
   const containerStyle = background.image
     ? { backgroundImage: `url(${background.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }
     : { backgroundColor: bgColors[background.color] || 'var(--surface)' };
@@ -70,49 +86,39 @@ function MessageGrid() {
   return (
     <>
       <PostHeader />
+
       <div className={styles.container} style={containerStyle}>
+        <div className={styles.deleteBtnWrapper}>
+          <Button
+            onClick={isEditMode ? handleDeleteRecipient : () => navigate(`/post/${id}/edit`)}
+          >
+            {isEditMode ? "롤링페이퍼 삭제" : "삭제하기"}
+          </Button>
+        </div>
+
         <div className={styles.cardList}>
-          {/* 추가 버튼 카드 */}
-          <div className={styles.addButtonCard}>
-            <div 
-              className={styles.addButton} 
-              onClick={() => navigate(`/post/${id}/message`)}
-            ></div>
-          </div>
-          {/* 메시지 카드 리스트 */}
+          {!isEditMode && (
+             <div className={styles.addButtonCard}>
+             <div
+               className={styles.addButton}
+               onClick={() => navigate(`/post/${id}/message`)}
+             ></div>
+           </div>
+          )}
+
+    
           {messages.map((message) => (
-            <div 
-              key={message.id} 
-              className={styles.messageCard} 
+            <MessageCard
+              key={message.id}
+              message={message}
+              isEditMode={isEditMode}
+              onDelete={handleDeleteMessage}
+              className={styles.messageCard}
               onClick={() => setSelectedMessage(message)}
-            >
-              <div className={styles.profileSection}>
-                {/* 프로필 이미지가 있을 때만 렌더링, 없으면 플레이스홀더 */}
-                {message.profileImageURL ? (
-                  <img src={message.profileImageURL} className={styles.profileImage} alt="프로필" />
-                ) : (
-                  <div className={styles.profileImagePlaceholder} />
-                )}
-                <div className={styles.senderInfo}>
-                  <div className={styles.nameBox}>
-                    <span>From.</span>
-                    <span className={styles.name}>{message.sender}</span>
-                  </div>
-                  <span className={`${styles.relationshipBadge} ${relationshipClassMap[message.relationship]}`}>
-                    {message.relationship}
-                  </span>
-                </div>
-              </div>
-              <p className={styles.content} style={{ fontFamily: message.font }}>
-                {message.content}
-              </p>
-              <span className={styles.date}>
-                {new Date(message.createdAt).toLocaleDateString()}
-              </span>
-            </div>
+            />
           ))}
         </div>
-        {/* 모달 렌더링 (selectedMessage가 있을 때만 띄움) */}
+
         {selectedMessage && (
           <PostModal
             message={selectedMessage}
