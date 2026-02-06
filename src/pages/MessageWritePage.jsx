@@ -25,10 +25,10 @@ const relClass = ['지인', '동료', '가족', '친구'];
 const fontClass = ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'];
 
 const fontStyleMapping = {
-  'Noto Sans': '"Noto Sans KR", sans-serif',
-  'Pretendard': 'Pretendard, -apple-system, sans-serif',
-  '나눔명조': '"Nanum Myeongjo", serif',
-  '나눔손글씨 손편지체': '"NanumHandwriting", cursive' 
+  'Noto Sans': "'Noto Sans KR', sans-serif",
+  'Pretendard': "Pretendard, -apple-system, sans-serif",
+  '나눔명조': "'Nanum Myeongjo', serif",
+  '나눔손글씨 손편지체': "'NanumHandwriting', cursive"
 };
 
 function MessageWritePage() {
@@ -85,7 +85,7 @@ function MessageWritePage() {
   };
 
   const isContentEmpty = (htmlContent) => {
-    const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
+    const d = new DOMParser().parseFromString(htmlContent, 'text/html');
     return doc.body.textContent.trim().length === 0;
   };
 
@@ -174,10 +174,12 @@ function MessageWritePage() {
           </div>
         )}
       </div>
-      {/* textarea */}
       <div className={styles.textArea}>
         <p className={styles.mainText}>내용을 입력해 주세요</p>
-        <div className={styles.editor} style={{ fontFamily: fontStyleMapping[selected2] }}>
+        <div 
+          className={styles.editor} 
+          style={{ fontFamily: fontStyleMapping[selected2] }}
+        >
           <ReactQuill 
             theme="snow" 
             modules={modules}
