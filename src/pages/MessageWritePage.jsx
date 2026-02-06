@@ -8,23 +8,30 @@ import Button from '../components/common/Button';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
+const images = [
+  { id: 1, url: 'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png', title: '메인 사진' },
+  { id: 2, url: 'https://picsum.photos/id/101/600/400', title: '건물' },
+  { id: 3, url: 'https://picsum.photos/id/102/600/400', title: '과일' },
+  { id: 4, url: 'https://picsum.photos/id/103/600/400', title: '들판' },
+  { id: 5, url: 'https://picsum.photos/id/152/600/400', title: '보라색 꽃' },
+  { id: 6, url: 'https://picsum.photos/id/111/600/400', title: '자동차' },
+  { id: 7, url: 'https://picsum.photos/id/171/600/400', title: '빗 방울' },
+  { id: 8, url: 'https://picsum.photos/id/112/600/400', title: '갈대' },
+  { id: 9, url: 'https://picsum.photos/id/122/600/400', title: '밤 대교' },
+  { id: 10, url: 'https://picsum.photos/id/135/600/400', title: '바다' },
+];
+
+const relClass = ['지인', '동료', '가족', '친구'];
+const fontClass = ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'];
+
+const fontStyleMapping = {
+  'Noto Sans': '"Noto Sans KR", sans-serif',
+  'Pretendard': 'Pretendard, -apple-system, sans-serif',
+  '나눔명조': '"Nanum Myeongjo", serif',
+  '나눔손글씨 손편지체': '"NanumHandwriting", cursive' 
+};
+
 function MessageWritePage() {
-  const images = [
-    { id: 1, url: 'https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png', title: '메인 사진' },
-    { id: 2, url: 'https://picsum.photos/id/101/600/400', title: '건물' },
-    { id: 3, url: 'https://picsum.photos/id/102/600/400', title: '과일' },
-    { id: 4, url: 'https://picsum.photos/id/103/600/400', title: '들판' },
-    { id: 5, url: 'https://picsum.photos/id/152/600/400', title: '보라색 꽃' },
-    { id: 6, url: 'https://picsum.photos/id/111/600/400', title: '자동차' },
-    { id: 7, url: 'https://picsum.photos/id/171/600/400', title: '빗 방울' },
-    { id: 8, url: 'https://picsum.photos/id/112/600/400', title: '갈대' },
-    { id: 9, url: 'https://picsum.photos/id/122/600/400', title: '밤 대교' },
-    { id: 10, url: 'https://picsum.photos/id/135/600/400', title: '바다' },
-  ];
-
-  const relClass = ['지인', '동료', '가족', '친구'];
-  const fontClass = ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'];
-
   const [title, setTitle] = useState('');
   const [isTouched, setIsTouched] = useState(false);
   const [selectedImg, setSelectedImg] = useState(images[0]);
@@ -53,19 +60,12 @@ function MessageWritePage() {
   ];
   
   const handleCreate = async () => {
-    
-    const fontMapping = {
-      'Noto Sans': 'Noto Sans',
-      'Pretendard': 'Pretendard',
-      '나눔명조': 'Nanum Myeongjo',
-      '나눔손글씨 손편지체': 'NanumHandwriting'
-    };
-
+    const contentText = new DOMParser().parseFromString(content, 'text/html').body.textContent || "";
     const postData = {
       sender: title,
       relationship: selected1,
-      content: content.replace(/<[^>]*>?/gm, ''),
-      font: fontMapping[selected2] || 'Noto Sans',
+      content: contentText,
+      font: selected2,
       profileImageURL: selectedImg.url
     };
 
@@ -177,7 +177,7 @@ function MessageWritePage() {
       {/* textarea */}
       <div className={styles.textArea}>
         <p className={styles.mainText}>내용을 입력해 주세요</p>
-        <div className={styles.editor}>
+        <div className={styles.editor} style={{ fontFamily: fontStyleMapping[selected2] }}>
           <ReactQuill 
             theme="snow" 
             modules={modules}
