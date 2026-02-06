@@ -5,6 +5,9 @@ import shareIconMobile from '../../assets/share_20.svg';
 import Toast from '../common/Toast';
 import { shareKakao } from '../../utils/share.js';
 
+
+const TOAST_DURATION = 3000;
+
 function ShareButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
@@ -28,7 +31,7 @@ function ShareButton() {
         // 5초 뒤에 자동으로 사라지게
         setTimeout(() => {
           setShowToast(false);
-        }, 5000);
+        }, TOAST_DURATION);
       })
       .catch((err) => {
         console.error('URL 복사 실패:', err);
