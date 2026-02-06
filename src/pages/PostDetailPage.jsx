@@ -1,9 +1,10 @@
 import React from 'react';
+import MessageGrid from '../components/post/MessageGrid';
 
 function PostDetailPage() {
   return (
     <div>
-      <h1>MainPage 입니다.</h1>
+      <MessageGrid />
     </div>
   );
 }
