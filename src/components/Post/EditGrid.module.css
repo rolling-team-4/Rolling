@@ -29,9 +29,14 @@
   z-index: 10; 
 }
 
+.buttonGroup {
+  display: flex;
+  gap: 8px; 
+}
+
 .cardList {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr); /* 3열 */
   gap: 24px;
   padding: 0 24px; 
   margin-bottom: 113px;
@@ -57,12 +62,17 @@
     z-index: 100;
   }
 
-  /* 삭제 버튼 */
-  .deleteBtnWrapper button {
+  /* 버튼 그룹 나란히 꽉 차게 */
+  .buttonGroup {
     width: 100%;
+    gap: 8px;
+  }
+
+  .buttonGroup button {
+    flex: 1; /* 두 버튼이 1:1 비율로 가득 참 */
     height: 55px;
     border-radius: 12px;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
   }
 
@@ -82,65 +92,13 @@
   }
 
   .cardList {
-    width: calc(100% - 40px); /* 좌우 여백 20px씩 */
+    width: calc(100% - 40px);
     grid-template-columns: 1fr; /* 1열 */
   }
-}
 
-/* 추가 버튼 카드 */
-.addButtonCard {
-  background-color: var(--white);
-  border-radius: 16px;
-  aspect-ratio: 1 / 0.8; /* 가로 1, 세로 0.8 비율 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* 플러스 아이콘 */
-.addButton {
-  position: relative;
-  width: 56px;
-  height: 56px;
-  background-color: var(--gray-500);
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* 마우스 올렸을 때 */
-.addButton:hover {
-  background-color: var(--gray-600); 
-}
-
-/* 클릭했을 때 */
-.addButton:active {
-  background-color: var(--gray-700);
-}
-
-/* 가상 요소로 플러스 버튼 만들기 */
-.addButton::before,
-.addButton::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-color: var(--white);
-  transform: translate(-50%, -50%);
-}
-
-/* 가로선 */
-.addButton::before {
-  width: 24px;
-  height: 3px;
-  border-radius: 10px;
-}
-
-/* 세로선 */
-.addButton::after {
-  width: 3px;
-  height: 24px;
-  border-radius: 10px;
+  .buttonGroup button {
+    font-size: 14px;
+  }
 }
 
 .skeletonCard {
