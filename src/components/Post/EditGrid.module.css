@@ -1,0 +1,42 @@
+/* 전체 컨테이너 */
+.container {
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+  position: relative;
+  background-attachment: fixed;
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 1200px;
+  margin: 0 auto 113px;
+}
+
+/* 화면 너비가 1248px보다 줄어들 때 */
+@media (max-width: 1248px) {
+  .cardList {
+    /* 좌우 여백을 24px로 고정하기 위해 전체 너비에서 48px을 제외 */
+    width: calc(100% - 48px);
+    /* 여백 고정 */
+    margin: 0 24px;
+    /* 1fr 설정에 의해 부모 너비가 줄어들면 카드들의 너비도 자동으로 함께 줄어듦. */
+  }
+}
+
+.deleteBtnWrapper {
+  width: 1200px;
+  display: flex;
+  justify-content: flex-end; /* 오른쪽 끝으로 밀기 */
+  margin-bottom: 11px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px; 
+}
