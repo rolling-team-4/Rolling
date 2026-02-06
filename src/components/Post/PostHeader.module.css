@@ -1,0 +1,146 @@
+
+.header {
+  width: 100%;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+}
+
+
+.headerContent {
+  width: 1200px;      
+  height: 68px;        
+  display: flex;
+  align-items: center; 
+  justify-content: space-between; 
+  
+  
+}
+
+
+.recipientInfo {
+  min-width: 227px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;     
+  font-size: 28px;
+  line-height: 42px;
+  letter-spacing: -0.01em;
+  color: #181818;
+}
+
+.writerInfo {
+  
+  display: flex;
+  align-items: center;
+  gap: 11px; 
+  
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 700;       
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 0%;
+  color: #181818;
+
+}
+
+
+.avatarGroup {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 28px;  
+  height: 28px;
+  border-radius: 50%;
+  border: 1.5px solid white;
+  object-fit: cover;
+  margin-left: -12px; 
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.avatarMore {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid #e3e3e3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  margin-left: -12px;
+  z-index: 1;
+}
+
+.countText strong {
+  font-weight: 700;
+}
+
+
+.actions {
+  display: flex;
+  align-items: center;
+
+}
+
+
+.divider {
+  width: 1px;
+  height: 28px;
+  background-color: #eeeeee;
+  margin: 0 16px; 
+
+}
+
+.shareWrapper {
+  margin-left: 10px;
+}
+
+
+
+@media (max-width: 1240px) {
+
+  .headerContent {
+    width: 100%;
+    padding: 0 24px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .headerContent {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    padding: 16px 20px;
+    gap: 12px;
+  }
+  
+  .actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .writerInfo {
+    display: none; 
+  }
+  
+  .divider {
+    display: none;
+  }
+  
+  .recipientInfo {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
