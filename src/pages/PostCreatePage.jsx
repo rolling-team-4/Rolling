@@ -3,24 +3,25 @@ import Button from '../components/common/Button';
 import styles from "./PostCreatePage.module.css";
 import Input from '../components/common/Input';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from 'axios'; 
 
-function PostCreatePage() {
-  const navigate = useNavigate(); 
-  const colors = ["#FFE2AD", "#ECD9FF", "#B1E4FF", "#D0F5C3"];
-  const images = [
-    "https://picsum.photos/id/100/3840/2160",
-    "https://picsum.photos/id/24/3840/2160",
-    "https://picsum.photos/id/153/3840/2160",
-    "https://picsum.photos/id/1051/3840/2160"
-  ];
-  const colorMap = {
+const colorMap = {
   "#FFE2AD": "beige",
   "#ECD9FF": "purple",
   "#B1E4FF": "blue",
   "#D0F5C3": "green"
 };
+const colors = Object.keys(colorMap);
 
+const images = [
+  "https://picsum.photos/id/100/3840/2160",
+  "https://picsum.photos/id/24/3840/2160",
+  "https://picsum.photos/id/153/3840/2160",
+  "https://picsum.photos/id/1051/3840/2160"
+];
+
+function PostCreatePage() {
+  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [isTouched, setIsTouched] = useState(false);
   const [selectedButton, setSelectedButton] = useState('color');
