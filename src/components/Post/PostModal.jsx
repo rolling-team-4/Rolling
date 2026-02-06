@@ -41,7 +41,6 @@ function PostModal({ message, onClose }) {
         <div className={styles.buttonWrapper}>
           <Button 
             onClick={onClose} 
-            
           >
             확인
           </Button>
