@@ -32,24 +32,22 @@ function PostDetailPage() {
   }, [id]);
 
   // 로딩 중일 때 처리
-  if (isLoading) {
-    return <div style={{ textAlign: 'center', padding: '100px' }}>로딩 중...</div>;
-  }
-  
-  if (!recipientData) {
-    return <div>데이터를 찾을 수 없습니다.</div>;
+  if (!isLoading && !recipientData) {
+    return <div style={{ textAlign: 'center', padding: '100px' }}>데이터를 찾을 수 없습니다.</div>;
   }
 
   return (
     <div style={{ width: '100%', overflowX: 'hidden' }}>
+      {/* 데이터를 불러오는 중(recipientData가 null)일 때 에러가 나지 않도록 빈값 설정 */}
       <PostHeader 
-        recipientName={recipientData.name} 
-        messageCount={recipientData.messageCount}
-        recentMessages={recipientData.recentMessages}
+        recipientName={recipientData?.name || ""} 
+        messageCount={recipientData?.messageCount || 0}
+        recentMessages={recipientData?.recentMessages || []}
       />
       <MessageGrid 
         recipientData={recipientData} 
-        messages={messages} 
+        messages={messages}
+        isLoading={isLoading}
       />
     </div>
   );

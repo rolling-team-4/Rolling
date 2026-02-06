@@ -1,11 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import api from '../../api/axios';
 import MessageCard from './MessageCard'; 
 import PostModal from './PostModal';
-import styles from './MessageGrid.module.css';
-import PostHeader from './PostHeader.jsx'; 
 import Button from '../common/Button'; 
+import styles from './MessageGrid.module.css';
 
 // 배경 스타일 설정
 const BG_COLORS = {
@@ -15,18 +13,17 @@ const BG_COLORS = {
   green: 'var(--green-200)',
 };
 
-function MessageGrid({ recipientData, messages }) { 
+function MessageGrid({ recipientData, messages, isLoading }) { 
   const navigate = useNavigate();
   const { id } = useParams();
-
-  // 상태 관리
   const [selectedMessage, setSelectedMessage] = useState(null);
 
-  if (!recipientData) {
-    return null;
-  }
+  // 로딩 중일 때 보여줄 가짜 카드 배열
+  const skeletonCards = Array(6).fill(0);
 
-  const { backgroundColor, backgroundImageURL } = recipientData;
+  // 로딩 중에는 데이터가 null일 수 있으므로 기본값 설정
+  const backgroundColor = recipientData?.backgroundColor || 'beige';
+  const backgroundImageURL = recipientData?.backgroundImageURL;
 
   const containerStyle = backgroundImageURL
     ? { backgroundImage: `url(${backgroundImageURL})`, backgroundSize: 'cover', backgroundPosition: 'center' }
@@ -41,22 +38,28 @@ function MessageGrid({ recipientData, messages }) {
       </div>
 
       <div className={styles.cardList}>
-        <div className={styles.addButtonCard}>
-          <div
-            className={styles.addButton}
-            onClick={() => navigate(`/post/${id}/message`)}
-          ></div>
-      </div>
+        {/* 데이터 로딩 중에는 추가 버튼을 숨긴다. */}
+        {!isLoading && (
+          <div className={styles.addButtonCard}>
+            <div className={styles.addButton} onClick={() => navigate(`/post/${id}/message`)}></div>
+          </div>
+        )}
         
-        {messages.map((message) => (
-          <MessageCard
-            key={message.id}
-            message={message}
-            isEditMode={false}
-            className={styles.messageCard}
-            onClick={() => setSelectedMessage(message)}
-          />
-        ))}
+        {/* 로딩 상태에 따른 분기 처리 */}
+        {isLoading ? (
+          skeletonCards.map((_, idx) => (
+            <div key={idx} className={styles.skeletonCard} />
+          ))
+        ) : (
+          messages.map((message) => (
+            <MessageCard
+              key={message.id}
+              message={message}
+              isEditMode={false}
+              onClick={() => setSelectedMessage(message)}
+            />
+          ))
+        )}
       </div>
 
       {selectedMessage && (

@@ -76,7 +76,6 @@
     font-weight: 700;
   }
 
-  /* 카드 리스트 */
   .cardList {
     width: calc(100% - 48px);
     grid-template-columns: repeat(2, 1fr); /* 2열 */
@@ -100,4 +99,10 @@
   .buttonGroup button {
     font-size: 14px;
   }
+}
+
+.skeletonCard {
+  background-color: var(--gray-200);
+  border-radius: 16px;
+  aspect-ratio: 1 / 0.8;
 }
