@@ -41,18 +41,17 @@ function PostDetailPage() {
   }
 
   return (
-    <>
+    <div style={{ width: '100%', overflowX: 'hidden' }}>
       <PostHeader 
         recipientName={recipientData.name} 
         messageCount={recipientData.messageCount}
         recentMessages={recipientData.recentMessages}
       />
-
       <MessageGrid 
         recipientData={recipientData} 
         messages={messages} 
       />
-    </>
+    </div>
   );
 }
 

@@ -7,36 +7,97 @@
   align-items: center;
   padding: 40px 0;
   position: relative;
-  background-attachment: fixed;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }
 
+.deleteBtnWrapper,
 .cardList {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  width: 1200px;
-  margin: 0 auto 113px;
-}
-
-/* 화면 너비가 1248px보다 줄어들 때 */
-@media (max-width: 1248px) {
-  .cardList {
-    /* 좌우 여백을 24px로 고정하기 위해 전체 너비에서 48px을 제외 */
-    width: calc(100% - 48px);
-    /* 여백 고정 */
-    margin: 0 24px;
-    /* 1fr 설정에 의해 부모 너비가 줄어들면 카드들의 너비도 자동으로 함께 줄어듦. */
-  }
+  width: 100%; 
+  max-width: 1200px;
+  box-sizing: border-box;
 }
 
 .deleteBtnWrapper {
-  width: 1200px;
   display: flex;
-  justify-content: flex-end; /* 오른쪽 끝으로 밀기 */
+  justify-content: flex-end;
   margin-bottom: 11px;
+  padding: 0 24px;
+  z-index: 10; 
 }
 
 .buttonGroup {
   display: flex;
   gap: 8px; 
+}
+
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3열 */
+  gap: 24px;
+  padding: 0 24px; 
+  margin-bottom: 113px;
+}
+
+/* 태블릿 */
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 0;
+  }
+
+  /* 삭제 버튼 영역 */
+  .deleteBtnWrapper {
+    /* 하단 고정 */
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: calc(100% - 48px); /* 좌우 여백 24px씩 */
+    padding: 0;
+    margin: 0;
+    z-index: 100;
+  }
+
+  /* 버튼 그룹 나란히 꽉 차게 */
+  .buttonGroup {
+    width: 100%;
+    gap: 8px;
+  }
+
+  .buttonGroup button {
+    flex: 1; /* 두 버튼이 1:1 비율로 가득 참 */
+    height: 55px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* 카드 리스트 */
+  .cardList {
+    width: calc(100% - 48px);
+    grid-template-columns: repeat(2, 1fr); /* 2열 */
+    gap: 16px;
+    margin: 0 auto;
+    padding: 0;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 360px) {
+  .deleteBtnWrapper {
+    width: calc(100% - 40px); /* 좌우 여백 20px씩 */
+  }
+
+  .cardList {
+    width: calc(100% - 40px);
+    grid-template-columns: 1fr; /* 1열 */
+  }
+
+  .buttonGroup button {
+    font-size: 14px;
+  }
 }

@@ -67,7 +67,7 @@ function PostEditPage() {
   if (!recipientData) return <div>데이터를 찾을 수 없습니다.</div>;
 
   return (
-    <>
+    <div style={{ width: '100%', overflowX: 'hidden' }}>
       <PostHeader 
         recipientName={recipientData.name} 
         messageCount={recipientData.messageCount}
@@ -81,7 +81,7 @@ function PostEditPage() {
         onDeleteRecipient={handleDeleteRecipient}
         onGoBack={handleGoBack}
       />
-    </>
+    </div>
   );
 }
 
