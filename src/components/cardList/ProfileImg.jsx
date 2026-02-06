@@ -1,5 +1,5 @@
 import React from "react";
-import styles from '../cardList/CardList.module.css';
+import styles from './CardList.module.css';
 
 
 function ProfileImg({ msgCnt , profile}) {
