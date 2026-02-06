@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from '../cardList/cardList.module.css';
+import styles from './CardList.module.css';
 import ProfileImg from './ProfileImg.jsx';
 
 

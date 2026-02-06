@@ -61,10 +61,20 @@ body {
 
 
 
-@media (max-width: 1024px) {
+@media (max-width: 1248px) {
   .listPage {
     max-width: 100%;
     padding: 0 24px; 
+  }
+
+  .btnBox { 
+    width: 100%;
+    height: auto;
+    margin-bottom: 40px;
+  }
+
+  .btnBox button{ 
+    width: 100%;
   }
 }
 
