@@ -1,5 +1,5 @@
 import React from 'react';
-import MessageGrid from '../components/post/MessageGrid';
+import MessageGrid from '../components/Post/MessageGrid.jsx';
 
 function PostDetailPage() {
   return (

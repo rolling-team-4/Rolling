@@ -1,9 +1,10 @@
 import React from 'react';
+import MessageGrid from '../components/post/MessageGrid';
 
 function PostEditPage() {
   return (
     <div>
-      <h1>MainPage 입니다.</h1>
+      <MessageGrid isEditMode={true} />
     </div>
   );
 }

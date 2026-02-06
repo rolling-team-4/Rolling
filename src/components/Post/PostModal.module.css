@@ -110,9 +110,11 @@
   justify-content: center;
 }
 
-.confirmButton {
-  width: 120px; 
+/* 래퍼 안의 공통 버튼 크기 조절 */
+.buttonWrapper > button {
+  width: 120px;
   height: 40px;
   padding: 0;
   font-size: 16px;
+  border-radius: 6px;
 }
