@@ -85,7 +85,7 @@ function MessageWritePage() {
   };
 
   const isContentEmpty = (htmlContent) => {
-    const d = new DOMParser().parseFromString(htmlContent, 'text/html');
+    const doc = new DOMParser().parseFromString(htmlContent, 'text/html');
     return doc.body.textContent.trim().length === 0;
   };
 
