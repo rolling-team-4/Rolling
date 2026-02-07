@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import CardList from '../components/CardList/CardList.jsx';
+import CardList from '../components/cardList/CardList.jsx';
 import Button from '../components/common/Button';
 import styles from './ListPage.module.css';
-import CardContext from '../components/CardList/CardContext.js';
-import { responseData } from '../components/CardList/getApiData.js';
+import CardContext from '../components/cardList/CardContext.js';
+import { responseData } from '../components/cardList/getApiData.js';
 
 const data = await responseData();
 
