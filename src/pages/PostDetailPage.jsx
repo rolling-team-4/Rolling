@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../api/axios';
-import PostHeader from '../components/post/PostHeader.jsx';
-import MessageGrid from '../components/post/MessageGrid.jsx';
+import PostHeader from '../components/Post/PostHeader.jsx';
+import MessageGrid from '../components/Post/MessageGrid.jsx';
 
 function PostDetailPage() {
   const { id } = useParams();
