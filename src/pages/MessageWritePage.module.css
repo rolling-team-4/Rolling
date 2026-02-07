@@ -1,10 +1,44 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&family=Noto+Sans+KR:wght@300;400;700&display=swap');
 @font-face {
-    font-family: 'NanumHandwriting';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/naverfont_03@1.0/nanumpen.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Noto Sans';
+  src: url('../assets/fonts/NotoSansKR-Regular.woff2') format('woff2'),
+      url('../assets/fonts/NotoSansKR-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
+@font-face {
+  font-family: 'Noto Sans';
+  src: url('../assets/fonts/NotoSansKR-Bold.woff2') format('woff2'),
+      url('../assets/fonts/NotoSansKR-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: '나눔명조';
+  src: url('../assets/fonts/NanumMyeongjoOTF00.woff2') format('woff2'),
+      url('../assets/fonts/NanumMyeongjoOTF00.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: '나눔명조';
+  src: url('../assets/fonts/NanumMyeongjoOTFBold00.woff2') format('woff2'),
+      url('../assets/fonts/NanumMyeongjoOTFBold00.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: '나눔손글씨 손편지체';
+  src: url('../assets/fonts/NanumPenOTF00.woff2') format('woff2'),
+      url('../assets/fonts/NanumPenOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .container {
   max-width: 720px;
   margin: 0 auto;
