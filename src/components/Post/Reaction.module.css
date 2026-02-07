@@ -1,0 +1,146 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px; 
+  position: relative;
+}
+.fixedGroup {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  width: 246px;
+  justify-content: flex-start;
+}
+
+.badgeList {
+  display: flex;
+  gap: 4px;
+  width: 208px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 66px;
+  padding: 8px 12px;
+  background-color: rgba(0, 0, 0, 0.54);
+  color: white;
+  border-radius: 32px;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.count {
+  font-family: Pretendard;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 0%;
+}
+
+.arrowButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background-color: transparent;
+  border: none; 
+  cursor: pointer;
+}
+
+.addButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background-color: white; 
+  border: 1px solid #cccccc;
+  border-radius: 8px; 
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  flex-shrink: 0;
+}
+
+
+.expandedContainer {
+  position: absolute;
+  top: 100%; 
+  right: 0; 
+  z-index: 100;
+  margin-top: 8px;
+  padding: 24px; 
+  background-color: white;
+  border: 1px solid #b0b0b0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-columns: repeat(4, auto); 
+  gap: 10px;
+  width: max-content;
+}
+
+.pickerPopover {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 200;
+  margin-top: 8px;
+}
+
+.iconMobile {
+  display: none; /* PC에서는 작은 아이콘 숨김 */
+}
+.iconDesktop {
+  display: block; 
+}
+
+
+@media (max-width: 767px) {
+  
+  .fixedGroup {
+    width: 215px;
+    gap: 2px;
+  }
+
+  .badgeList {
+    width: 177px;
+    gap: 8px;
+  }
+
+  .badge {
+    width: 55px;
+    height: 28px;
+    padding: 4px 8px; 
+    gap: 8px; 
+  }
+
+  .count {
+    font-size: 14px;
+  }
+
+  .addButton {
+    width: 36px;
+    height: 32px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    gap: 0; 
+  }
+
+
+  .addText {
+    display: none;
+  }
+  .iconDesktop {
+    display: none;
+  }
+  .iconMobile {
+    display: block;
+  }
+}
