@@ -15,12 +15,12 @@ function EditGrid({ recipientData, messages, onDeleteMessage, onDeleteRecipient,
   const skeletonCards = Array(6).fill(0);
 
   // 로딩 중에는 데이터가 null일 수 있으므로 기본값 설정
-  const backgroundColor = recipientData?.backgroundColor || 'beige';
+  const backgroundColor = recipientData?.backgroundColor;
   const backgroundImageURL = recipientData?.backgroundImageURL;
 
   const containerStyle = backgroundImageURL
     ? { backgroundImage: `url(${backgroundImageURL})`, backgroundSize: 'cover', backgroundPosition: 'center' }
-    : { backgroundColor: BG_COLORS[backgroundColor] || 'var(--surface)' };
+    : { backgroundColor: BG_COLORS[backgroundColor] || 'var(--gray-100)' };
 
   return (
     <div className={styles.container} style={containerStyle}>
