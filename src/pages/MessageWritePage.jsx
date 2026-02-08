@@ -25,10 +25,10 @@ const relClass = ['지인', '동료', '가족', '친구'];
 const fontClass = ['Noto Sans', 'Pretendard', '나눔명조', '나눔손글씨 손편지체'];
 
 const fontStyleMapping = {
-  'Noto Sans': "'Noto Sans KR', sans-serif",
+  'Noto Sans': "'Noto Sans', sans-serif",
   'Pretendard': "Pretendard, -apple-system, sans-serif",
-  '나눔명조': "'Nanum Myeongjo', serif",
-  '나눔손글씨 손편지체': "'NanumHandwriting', cursive"
+  '나눔명조': "'나눔명조', serif",
+  '나눔손글씨 손편지체': "'나눔손글씨 손편지체', cursive"
 };
 
 function MessageWritePage() {
