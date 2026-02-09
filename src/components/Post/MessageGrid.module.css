@@ -1,17 +1,19 @@
 /* 전체 컨테이너 */
 .container {
   width: 100%;
-  min-height: calc(100vh - 60px);
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 0;
+  padding: 40px 0 120px 0;
   position: relative;
 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: scroll;
+  background-attachment: fixed;
+  min-width: fit-content;
 }
 
 .deleteBtnWrapper,
@@ -34,13 +36,13 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   padding: 0 24px; 
-  margin-bottom: 113px;
 }
 
 /* 태블릿 */
 @media (max-width: 768px) {
   .container {
-    padding: 24px 0;
+    padding: 24px 0 120px 0;
+    background-attachment: scroll;
   }
 
   /* 삭제 버튼 영역 */
