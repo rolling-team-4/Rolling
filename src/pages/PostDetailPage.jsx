@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../api/axios';
-import PostHeader from '../components/post/PostHeader.jsx';
-import MessageGrid from '../components/post/MessageGrid.jsx';
+import PostHeader from '../components/Post/PostHeader.jsx';
+import MessageGrid from '../components/Post/MessageGrid.jsx';
 
 function PostDetailPage() {
   const { id } = useParams();
@@ -37,7 +37,7 @@ function PostDetailPage() {
   }
 
   return (
-    <div style={{ width: '100%', overflowX: 'hidden' }}>
+    <div style={{ width: '100%'}}>
       {/* 데이터를 불러오는 중(recipientData가 null)일 때 에러가 나지 않도록 빈값 설정 */}
       <PostHeader 
         recipientName={recipientData?.name || ""} 

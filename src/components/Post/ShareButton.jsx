@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from './ShareButton.module.css';
 import shareIcon from '../../assets/share_24.svg';
 import shareIconMobile from '../../assets/share_20.svg';
-import Toast from '../common/Toast';
+import Toast from '../common/Toast.jsx';
 import { shareKakao } from '../../utils/share.js';
 
 

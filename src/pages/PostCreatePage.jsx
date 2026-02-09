@@ -31,8 +31,6 @@ function PostCreatePage() {
   const isTitleError = isTouched && title.trim() === '';
 
   const handleSubmit = async () => {
-    console.log("선택된 아이템:", selectedItem);
-    console.log("보낼 이미지 URL:", images[selectedItem]);
     const postData = {
       name: title,
       backgroundColor: selectedButton === 'color' ? colorMap[selectedItem] : 'beige',
@@ -112,7 +110,6 @@ function PostCreatePage() {
           이미지
         </Button>
       </div>
-      {/* 리스트 영역 */}
       <ul className={styles.list}>
         {selectedButton === "color" &&
           colors.map((color) => (

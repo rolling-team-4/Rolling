@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
-import PostHeader from '../components/post/PostHeader.jsx'; 
-import EditGrid from '../components/post/EditGrid.jsx'; 
+import PostHeader from '../components/Post/PostHeader.jsx'; 
+import EditGrid from '../components/Post/EditGrid.jsx'; 
 
 function PostEditPage() {
   const { id } = useParams();

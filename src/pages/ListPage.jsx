@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import CardList from '../components/cardList/CardList.jsx';
 import Button from '../components/common/Button';
@@ -7,10 +8,19 @@ import styles from './ListPage.module.css';
 import CardContext from '../components/cardList/CardContext.js';
 import { responseData } from '../components/cardList/getApiData.js';
 
-const data = await responseData();
 
 function ListPage() {
   const navigate = useNavigate();
+  const [data, setData] = useState({ results: [] });
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await responseData();
+      setData(response);
+    };
+
+    fetchData();
+  }, []);
 
   const popularList = [...data.results].sort(
     (a, b) => b.messageCount - a.messageCount
@@ -19,6 +29,7 @@ function ListPage() {
   const recentList = [...data.results].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
+
   
   return (
     <CardContext.Provider value={data}>
