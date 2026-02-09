@@ -37,7 +37,7 @@ function PostDetailPage() {
   }
 
   return (
-    <div style={{ width: '100%', overflowX: 'hidden' }}>
+    <div style={{ width: '100%'}}>
       {/* 데이터를 불러오는 중(recipientData가 null)일 때 에러가 나지 않도록 빈값 설정 */}
       <PostHeader 
         recipientName={recipientData?.name || ""} 
