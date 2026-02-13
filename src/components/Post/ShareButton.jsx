@@ -11,9 +11,7 @@ const TOAST_DURATION = 3000;
 function ShareButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
-
-  const DEPLOY_URL = "https://rolling-pi-lemon.vercel.app";
-
+  
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
@@ -28,7 +26,7 @@ function ShareButton() {
   const handleCopyUrl = () => {
     const realUrl = "https://rolling-pi-lemon.vercel.app" + window.location.pathname;
 
-    navigator.clipboard.writeText(currentUrl)
+    navigator.clipboard.writeText(realUrl)
       .then(() => {
         setShowToast(true); 
         setIsOpen(false); 
