@@ -12,16 +12,21 @@ function ShareButton() {
   const [isOpen, setIsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
 
+  const DEPLOY_URL = "https://rolling-pi-lemon.vercel.app";
+
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
   const handleShareKakao = () => {
-   shareKakao(window.location.href);
+    // 배포 주소 + 페이지 경로(ID포함)
+    const realUrl = "https://rolling-pi-lemon.vercel.app" + window.location.pathname;
+    console.log("공유될 주소:", realUrl);
+    shareKakao(realUrl);
   };
 
   const handleCopyUrl = () => {
-    const currentUrl = window.location.href;
+    const realUrl = "https://rolling-pi-lemon.vercel.app" + window.location.pathname;
 
     navigator.clipboard.writeText(currentUrl)
       .then(() => {
